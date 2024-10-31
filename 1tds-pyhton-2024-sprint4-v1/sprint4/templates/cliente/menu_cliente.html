@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu de Clientes</h1>
+        <ul>
+            <li><a href="{{ url_for('cliente.cadastrar_cliente') }}">Cadastrar Cliente</a></li>
+            <li><a href="{{ url_for('cliente.listar_clientes') }}">Listar Clientes</a></li>
+            <!-- Alteração para redirecionar para a página de busca de cliente -->
+            <li><a href="{{ url_for('cliente.buscar_cliente') }}">Alterar Cliente</a></li>
+            <!-- Alteração para redirecionar para a página de busca de cliente para exclusão -->
+            <li><a href="{{ url_for('cliente.deletar_cliente') }}">Deletar Cliente</a></li>
+        </ul>
+        <a href="{{ url_for('menu_principal') }}">Voltar ao Menu Principal</a>
+    </div>
+</body>
+</html>

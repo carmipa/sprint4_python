@@ -1,0 +1,24 @@
+<!-- arquivo: templates/agenda/cadastrar_agenda.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Agenda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Cadastrar Agenda</h1>
+        <form action="{{ url_for('agenda.cadastrar_agenda') }}" method="post" id="agendaForm">
+            <label for="data_agendamento">Data do Agendamento:</label>
+            <input type="date" id="data_agendamento" name="data_agendamento" required>
+
+            <label for="obs_agendamento">Observações:</label>
+            <textarea id="obs_agendamento" name="obs_agendamento"></textarea>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+        <a href="{{ url_for('agenda.menu_agenda') }}">Voltar ao Menu de Agenda</a>
+    </div>
+</body>
+</html>

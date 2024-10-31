@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Veículo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Alterar Veículo</h1>
+        <!-- Primeiro formulário para busca do veículo -->
+        <form action="{{ url_for('veiculo.buscar_veiculo_para_alterar') }}" method="post">
+            <label for="search_term">ID ou Modelo do Veículo:</label>
+            <input type="text" name="search_term" id="search_term" required>
+            <button type="submit">Buscar Veículo</button>
+        </form>
+
+        {% if veiculo %}
+        <h2>Dados Atuais</h2>
+        <!-- Formulário de alteração preenchido com os dados do veículo encontrado -->
+        <form action="{{ url_for('veiculo.alterar_veiculo', id_veiculo=veiculo.id) }}" method="post">
+            <label for="tipo">Tipo:</label>
+            <input type="text" name="tipo" value="{{ veiculo.tipo }}" required>
+
+            <label for="montadora">Fabricante:</label>
+            <input type="text" name="montadora" value="{{ veiculo.montadora }}" required>
+
+            <label for="modelo">Modelo:</label>
+            <input type="text" name="modelo" value="{{ veiculo.modelo }}" required>
+
+            <label for="ano">Ano:</label>
+            <input type="number" name="ano" min="1900" max="2099" value="{{ veiculo.ano_fabricacao }}" required>
+
+            <label for="renavam">Renavam:</label>
+            <input type="text" name="renavam" value="{{ veiculo.renavam }}" pattern="\d{11}" maxlength="11" required>
+
+            <label for="placa">Placa:</label>
+            <input type="text" name="placa" value="{{ veiculo.placa }}" pattern="[A-Z]{3}-\d{4}|[A-Z]{3}\d[A-Z]\d{2}" maxlength="8" required>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        {% else %}
+        <p>Utilize o campo acima para buscar um veículo.</p>
+        {% endif %}
+        <a href="{{ url_for('veiculo.menu_veiculo') }}">Voltar ao Menu de Veículos</a>
+    </div>
+</body>
+</html>

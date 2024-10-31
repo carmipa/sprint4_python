@@ -1,0 +1,23 @@
+<!-- arquivo: templates/agenda/menu_agenda.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu de Agenda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu de Agenda da Oficina</h1>
+        <ul>
+            <li><a href="{{ url_for('agenda.cadastrar_agenda') }}">Cadastrar Agenda</a></li>
+            <li><a href="{{ url_for('agenda.listar_agenda') }}">Listar Agendas</a></li>
+            <!-- Redirecionamento para a página de busca para alteração de agenda -->
+            <li><a href="{{ url_for('agenda.buscar_agenda') }}">Alterar Agenda</a></li>
+            <!-- Redirecionamento para a página de busca para exclusão de agenda -->
+            <li><a href="{{ url_for('agenda.deletar_agenda') }}">Deletar Agenda</a></li>
+        </ul>
+        <a href="{{ url_for('menu_principal') }}">Voltar ao Menu Principal</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!-- arquivo: templates/orcamento/buscar_orcamento_para_alterar.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Orçamento para Alteração</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Buscar Orçamento para Alteração</h1>
+        <form action="{{ url_for('orcamento.buscar_orcamento_para_alterar') }}" method="post">
+            <label for="orcamento_id">ID do Orçamento:</label>
+            <input type="text" name="orcamento_id" id="orcamento_id" required>
+            <button type="submit">Buscar Orçamento</button>
+        </form>
+        <br>
+        <a href="{{ url_for('orcamento.menu_orcamento') }}">Voltar ao Menu de Orçamento</a>
+    </div>
+</body>
+</html>

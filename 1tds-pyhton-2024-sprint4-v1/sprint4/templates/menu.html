@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Overlay escurecido -->
+    <div class="overlay"></div>
+
+    <!-- Menu Principal -->
+    <div class="menu-container">
+        <h1>Menu Principal</h1>
+        <ul>
+            <li><a href="{{ url_for('cliente.menu_clientes') }}">CLIENTES</a></li>
+
+            <li><a href="{{ url_for('veiculo.menu_veiculo') }}">VEÍCULOS</a></li>
+
+            <li><a href="{{ url_for('oficina.menu_oficina') }}">OFICINA</a></li>
+
+            <li><a href="{{ url_for('agenda.menu_agenda') }}">AGENDAMENTO</a></li>
+
+            <li><a href="{{ url_for('orcamento.menu_orcamento') }}">ORÇAMENTO</a></li>
+
+            <li><a href="{{ url_for('pagamento.menu_pagamento') }}">PAGAMENTO</a></li>
+
+            </br>
+            <li><a href="/">SAIR DO SISTEMA</a></li>
+        </ul>
+    </div>
+
+    <!-- Popup de informação -->
+    <div class="popup">
+        <span class="popup-close">X</span>
+        <p class="popup-content"></p>
+    </div>
+
+    <!-- Importando o JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

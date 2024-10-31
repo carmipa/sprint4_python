@@ -1,0 +1,56 @@
+<!-- templates/oficina/listar_oficina.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Oficinas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="list-container">
+        <h1>Oficinas Cadastradas</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        {% if oficinas %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Data da Oficina</th>
+                        <th>Descrição do Problema</th>
+                        <th>Diagnóstico IA</th>
+                        <th>Partes Afetadas</th>
+                        <th>Horas Trabalhadas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for oficina in oficinas %}
+                        <tr>
+                            <td>{{ oficina.id }}</td>
+                            <td>{{ oficina.data_oficina }}</td>
+                            <td>{{ oficina.descricao_problema }}</td>
+                            <td>{{ oficina.diagnostico }}</td>
+                            <td>{{ oficina.partes_afetadas }}</td>
+                            <td>{{ oficina.horas_trabalhadas }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Nenhuma oficina cadastrada.</p>
+        {% endif %}
+
+        <a href="{{ url_for('oficina.menu_oficina') }}">Voltar ao Menu de Oficina</a>
+    </div>
+</body>
+</html>

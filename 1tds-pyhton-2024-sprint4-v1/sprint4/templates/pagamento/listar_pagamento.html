@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Pagamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="list-container">
+        <h1>Pagamentos Cadastrados</h1>
+        {% if pagamentos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data do Pagamento</th>
+                    <th>Tipo de Pagamento</th>
+                    <th>Desconto (%)</th>
+                    <th>Total Parcelas</th>
+                    <th>Valor da Parcela (R$)</th>
+                    <th>Valor Total com Desconto (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pagamento in pagamentos %}
+                <tr>
+                    <td>{{ pagamento.id }}</td>
+                    <td>{{ pagamento.data_pagamento }}</td>
+                    <td>{{ pagamento.tipo_pagamento }}</td>
+                    <td>{{ pagamento.desconto }}</td>
+                    <td>{{ pagamento.total_parcelas }}</td>
+                    <td>{{ pagamento.valor_parcelas }}</td>
+                    <td>{{ pagamento.total_pagamento_desconto }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Nenhum pagamento encontrado.</p>
+        {% endif %}
+        <a href="{{ url_for('pagamento.menu_pagamento') }}">Voltar ao Menu de Pagamento</a>
+    </div>
+</body>
+</html>

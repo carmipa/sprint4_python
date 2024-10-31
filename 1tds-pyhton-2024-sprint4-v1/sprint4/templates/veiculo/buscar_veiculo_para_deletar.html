@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Veículo para Deletar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Buscar Veículo para Deletar</h1>
+        <form action="{{ url_for('veiculo.buscar_veiculo_para_deletar') }}" method="post">
+            <label for="search_term">ID ou Modelo do Veículo:</label>
+            <input type="text" name="search_term" id="search_term" required>
+            <button type="submit">Buscar</button>
+        </form>
+
+        {% if veiculo %}
+        <div>
+            <h2>Confirmação de Exclusão</h2>
+            <p>Tem certeza de que deseja deletar o veículo {{ veiculo['modelo'] }} - {{ veiculo['placa'] }}?</p>
+            <form action="{{ url_for('veiculo.deletar_veiculo', id_veiculo=veiculo['id']) }}" method="post">
+                <button type="submit">Confirmar Exclusão</button>
+            </form>
+        </div>
+        {% else %}
+        <p>Utilize o campo acima para buscar um veículo antes de excluir.</p>
+        {% endif %}
+
+        <a href="{{ url_for('veiculo.menu_veiculo') }}">Voltar ao Menu de Veículos</a>
+    </div>
+</body>
+</html>

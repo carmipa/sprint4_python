@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu de Pagamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu de Pagamento</h1>
+        <ul>
+            <li><a href="{{ url_for('pagamento.cadastrar_pagamento') }}">Cadastrar Pagamento</a></li>
+            <li><a href="{{ url_for('pagamento.listar_pagamentos') }}">Listar Pagamentos</a></li>
+            <li><a href="{{ url_for('pagamento.buscar_pagamento_para_alterar') }}">Alterar Pagamento</a></li>
+            <li><a href="{{ url_for('pagamento.buscar_pagamento_para_deletar') }}">Deletar Pagamento</a></li>
+        </ul>
+        <a href="{{ url_for('menu_principal') }}">Voltar ao Menu Principal</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Orçamento e Pagamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu de Orçamento</h1>
+        <ul>
+            <li><a href="{{ url_for('orcamento.cadastrar_orcamento') }}">Cadastrar Orçamento</a></li>
+            <li><a href="{{ url_for('orcamento.listar_orcamentos') }}">Listar Orçamentos</a></li>
+            <li><a href="{{ url_for('orcamento.buscar_orcamento_para_alterar') }}">Alterar Orçamento</a></li>
+            <li><a href="{{ url_for('orcamento.buscar_orcamento_para_deletar') }}">Deletar Orçamento</a></li>
+            <li><a href="{{ url_for('menu_principal') }}">Voltar ao Menu Principal</a></li>
+        </ul>
+    </div>
+</body>
+</html>

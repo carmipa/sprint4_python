@@ -1,0 +1,44 @@
+<!-- templates/oficina/deletar_oficina.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Oficina</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Deletar Oficina</h1>
+
+        <!-- Formulário para buscar a oficina por ID -->
+        <form action="{{ url_for('oficina.buscar_oficina_para_deletar') }}" method="post">
+            <label for="oficina_id">ID da Oficina:</label>
+            <input type="text" name="oficina_id" id="oficina_id" required>
+            <button type="submit">Buscar Oficina</button>
+        </form>
+
+        {% if oficina %}
+            <div class="oficina-info">
+                <p><strong>Data da Oficina:</strong> {{ oficina['data_oficina'] }}</p>
+                <p><strong>Descrição do Problema:</strong> {{ oficina['descricao_problema'] }}</p>
+                <p><strong>Diagnóstico:</strong> {{ oficina['diagnostico'] }}</p>
+                <p><strong>Partes Afetadas:</strong> {{ oficina['partes_afetadas'] }}</p>
+                <p><strong>Horas Trabalhadas:</strong> {{ oficina['horas_trabalhadas'] }}</p>
+
+                <!-- Confirmação de exclusão -->
+                <form action="{{ url_for('oficina.confirmar_deletar_oficina', id_ofic=oficina['id']) }}" method="post">
+                    <button type="submit">Confirmar Deleção</button>
+                </form>
+            </div>
+        {% elif oficina is none %}
+            <p>Nenhuma oficina encontrada com o ID fornecido.</p>
+        {% endif %}
+
+            <p>Nenhuma oficina enco
+
+        <a href="{{ url_for('oficina.menu_oficina') }}">Voltar ao Menu de Oficina</a>
+    </div>
+</body>
+</html>

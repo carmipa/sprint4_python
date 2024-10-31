@@ -1,0 +1,38 @@
+<!-- arquivo: templates/agenda/deletar_agenda.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Agendamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Deletar Agendamento</h1>
+
+        <!-- Formulário para buscar o agendamento por ID -->
+        <form action="{{ url_for('agenda.deletar_agenda') }}" method="post">
+            <label for="agenda_id">ID do Agendamento:</label>
+            <input type="text" name="agenda_id" id="agenda_id" required>
+            <button type="submit">Buscar Agendamento</button>
+        </form>
+
+        {% if agenda %}
+            <div class="agenda-info">
+                <p><strong>Data do Agendamento:</strong> {{ agenda['data_agendamento'] }}</p>
+                <p><strong>Observações:</strong> {{ agenda['obs_agendamento'] }}</p>
+
+                <!-- Confirmação de exclusão -->
+                <form action="{{ url_for('agenda.confirmar_deletar_agenda', id_agendamento=agenda['id']) }}" method="post">
+                    <button type="submit">Confirmar Deleção</button>
+                </form>
+            </div>
+        {% elif agenda_not_found %}
+            <p>Agendamento não encontrado com o ID fornecido.</p>
+        {% endif %}
+
+        <a href="{{ url_for('agenda.menu_agenda') }}">Voltar ao Menu de Agenda</a>
+    </div>
+</body>
+</html>

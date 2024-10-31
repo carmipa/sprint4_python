@@ -1,0 +1,31 @@
+<!-- arquivo: templates/agenda/alterar_agenda.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Agendamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Alterar Agendamento</h1>
+
+        {% if agenda %}
+        <form action="{{ url_for('agenda.alterar_agenda', id_agendamento=agenda['id']) }}" method="post">
+            <label for="data_agendamento">Data do Agendamento:</label>
+            <input type="date" id="data_agendamento" name="data_agendamento" value="{{ agenda['data_agendamento'] }}" required>
+
+            <label for="obs_agendamento">Observações:</label>
+            <textarea id="obs_agendamento" name="obs_agendamento">{{ agenda['obs_agendamento'] }}</textarea>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        {% else %}
+            <p>Erro: Agendamento não encontrado.</p>
+        {% endif %}
+
+        <a href="{{ url_for('agenda.menu_agenda') }}">Voltar ao Menu de Agenda</a>
+    </div>
+</body>
+</html>

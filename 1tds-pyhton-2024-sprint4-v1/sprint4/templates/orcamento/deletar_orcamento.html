@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Orçamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Deletar Orçamento</h1>
+
+        {% if orcamento %}
+            <div class="orcamento-info">
+                <p><strong>Data do Orçamento:</strong> {{ orcamento['data_orcamento'] }}</p>
+                <p><strong>Valor Mão de Obra:</strong> {{ orcamento['valor_maodeobra'] }}</p>
+                <p><strong>Valor Hora:</strong> {{ orcamento['valor_hora'] }}</p>
+                <p><strong>Quantidade de Horas:</strong> {{ orcamento['quantidade_horas'] }}</p>
+                <p><strong>Valor Total:</strong> {{ orcamento['valor_total'] }}</p>
+
+                <!-- Formulário para confirmação de exclusão -->
+                <form action="{{ url_for('orcamento.confirmar_deletar_orcamento', id_orc=orcamento['id']) }}" method="post">
+                    <button type="submit">Confirmar Deleção</button>
+                </form>
+            </div>
+        {% elif messages %}
+            <p>Orçamento não encontrado com o ID fornecido.</p>
+        {% endif %}
+
+        <a href="{{ url_for('orcamento.menu_orcamento') }}">Voltar ao Menu de Orçamento</a>
+    </div>
+</body>
+</html>

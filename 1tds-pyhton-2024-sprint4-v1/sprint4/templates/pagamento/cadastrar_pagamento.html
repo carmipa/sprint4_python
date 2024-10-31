@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Pagamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="form-container">
+    <h1>Cadastrar Pagamento</h1>
+    <form action="{{ url_for('pagamento.cadastrar_pagamento') }}" method="post">
+
+        <fieldset>
+            <legend><h2>Pagamento</h2></legend>
+
+            <label for="data_pagamento">Data do pagamento:</label>
+            <input type="date" name="data_pagamento" id="data_pagamento" required>
+
+            <label for="tipo_pagamento">Tipo de pagamento:</label>
+            <select name="tipo_pagamento" id="tipo_pagamento" required>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="pix">PIX</option>
+                <option value="debito">Débito</option>
+                <option value="credito">Crédito</option>
+                <option value="credito_parcelado">Crédito parcelado</option>
+            </select>
+
+            <label for="desconto">Desconto (%):</label>
+            <select name="desconto" id="desconto" required>
+                <option value="20">Dinheiro = 20%</option>
+                <option value="15">PIX = 15%</option>
+                <option value="10">Débito = 10%</option>
+                <option value="5">Crédito = 5%</option>
+                <option value="2">Crédito parcelado = 2%</option>
+            </select>
+
+            <label for="total_parcelas">Quantidade de parcelas:</label>
+            <select name="total_parcelas" id="total_parcelas" required>
+                <option value="1">1X</option>
+                <option value="2">2X</option>
+                <option value="3">3X</option>
+                <option value="4">4X</option>
+                <option value="5">5X</option>
+            </select>
+
+            <label for="valor_servico">Valor do Serviço (R$):</label>
+            <input type="text" id="valor_servico" name="valor_servico" placeholder="Ex: 1.000,00"
+                   pattern="^\d{1,3}(?:\.\d{3})*,\d{2}$" required>
+
+            <label for="valor_parcela">Valor das parcelas (R$):</label>
+            <input type="text" id="valor_parcela" name="valor_parcela" readonly>
+
+            <label for="valor_pagamento">Valor Total com Desconto (R$):</label>
+            <input type="text" id="valor_pagamento" name="valor_pagamento" readonly>
+        </fieldset>
+
+        <button type="submit">Cadastrar Pagamento</button>
+    </form>
+    <a href="{{ url_for('pagamento.menu_pagamento') }}">Voltar ao Menu de Pagamento</a>
+</div>
+
+<script>
+    // Função para aplicar máscara monetária nos campos de entrada
+    function aplicarMascara(input) {
+        input.addEventListener('input', function () {
+            let valor = this.value.replace(/\D/g, '');
+            if (valor.length > 0) {
+                valor = valor.replace(/([0-9]{2})$/g, ',$1');
+                valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            }
+            this.value = valor;
+        });
+    }
+
+    // Função para calcular valor total com desconto e parcelas
+    function calcularValores() {
+        const desconto = parseFloat(document.getElementById('desconto').value) || 0;
+        const valorServico = parseFloat(document.getElementById('valor_servico').value.replace(/\./g, '').replace(',', '.')) || 0;
+        const totalParcelas = parseInt(document.getElementById('total_parcelas').value) || 1;
+
+        const valorTotalComDesconto = valorServico - (valorServico * desconto / 100);
+        const valorParcela = valorTotalComDesconto / totalParcelas;
+
+        document.getElementById('valor_pagamento').value = valorTotalComDesconto.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        document.getElementById('valor_parcela').value = valorParcela.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+
+    // Aplicar máscara e adicionar eventos de cálculo para os campos necessários
+    const valorServicoInput = document.getElementById('valor_servico');
+    aplicarMascara(valorServicoInput);
+    document.getElementById('desconto').addEventListener('change', calcularValores);
+    valorServicoInput.addEventListener('input', calcularValores);
+    document.getElementById('total_parcelas').addEventListener('change', calcularValores);
+</script>
+</body>
+</html>

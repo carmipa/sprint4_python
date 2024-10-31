@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Veículos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="list-container">
+        <h1>Veículos Cadastrados</h1>
+        {% if veiculos %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tipo</th>
+            <th>Fabricante</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Renavam</th>
+            <th>Placa</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for veiculo in veiculos %}
+        <tr>
+            <td>{{ veiculo['id'] }}</td>
+            <td>{{ veiculo['tipo'] }}</td>
+            <td>{{ veiculo['montadora'] }}</td>
+            <td>{{ veiculo['modelo'] }}</td>
+            <td>{{ veiculo['ano_fabricacao'] }}</td>
+            <td>{{ veiculo['renavam'] }}</td>
+            <td>{{ veiculo['placa'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Nenhum veículo encontrado.</p>
+{% endif %}
+<a href="{{ url_for('veiculo.menu_veiculo') }}">Voltar ao Menu de Veículos</a>
+
+    </div>
+</body>
+</html>

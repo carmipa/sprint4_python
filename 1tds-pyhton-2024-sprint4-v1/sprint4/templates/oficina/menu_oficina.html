@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Oficina</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu Oficina</h1>
+        <ul>
+            <li><a href="{{ url_for('oficina.cadastrar_oficina') }}">Cadastrar Oficina</a></li>
+            <li><a href="{{ url_for('oficina.listar_oficinas') }}">Listar Oficinas</a></li>
+            <!-- Link para a página de busca para alteração de oficina -->
+            <li><a href="{{ url_for('oficina.buscar_oficina_para_alterar') }}">Alterar Oficina</a></li>
+            <!-- Link para a página de busca para exclusão de oficina -->
+            <li><a href="{{ url_for('oficina.buscar_oficina_para_deletar') }}">Deletar Oficina</a></li>
+            <li><a href="{{ url_for('menu_principal') }}">Voltar ao Menu Principal</a></li>
+        </ul>
+    </div>
+</body>
+</html>

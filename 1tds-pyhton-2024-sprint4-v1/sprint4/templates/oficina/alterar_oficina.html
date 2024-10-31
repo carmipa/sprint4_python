@@ -1,0 +1,41 @@
+<!-- templates/oficina/alterar_oficina.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Oficina</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Alterar Oficina</h1>
+
+        {% if oficina %}
+        <form action="{{ url_for('oficina.alterar_oficina', id_ofic=oficina['id']) }}" method="post">
+            <label for="data_oficina">Data da Oficina:</label>
+            <input type="date" id="data_oficina" name="data_oficina" value="{{ oficina['data_oficina'] }}" required>
+
+            <label for="descricao_problema">Descrição do Problema:</label>
+            <textarea id="descricao_problema" name="descricao_problema" required>{{ oficina['descricao_problema'] }}</textarea>
+
+            <label for="diagnostico">Diagnóstico IA:</label>
+            <textarea id="diagnostico" name="diagnostico" required>{{ oficina['diagnostico'] }}</textarea>
+
+            <label for="partes_afetadas">Partes Afetadas:</label>
+            <textarea id="partes_afetadas" name="partes_afetadas" required>{{ oficina['partes_afetadas'] }}</textarea>
+
+            <label for="horas_trabalhadas">Horas Trabalhadas:</label>
+            <input type="number" step="0.01" id="horas_trabalhadas" name="horas_trabalhadas" value="{{ oficina['horas_trabalhadas'] }}" required>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        {% else %}
+            <p>Erro: Oficina não encontrada.</p>
+        {% endif %}
+
+        <a href="{{ url_for('oficina.menu_oficina') }}">Voltar ao Menu de Oficina</a>
+    </div>
+</body>
+</html>

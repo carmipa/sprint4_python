@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Pagamento para Alterar</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Buscar Pagamento para Alterar</h1>
+        <form action="{{ url_for('pagamento.buscar_pagamento_para_alterar') }}" method="post">
+            <label for="pagamento_id">ID do Pagamento:</label>
+            <input type="text" name="pagamento_id" id="pagamento_id" required>
+            <button type="submit">Buscar Pagamento</button>
+        </form>
+
+        {% if pagamento %}
+            <div class="payment-details">
+                <h2>Dados do Pagamento</h2>
+                <p><strong>Data do Pagamento:</strong> {{ pagamento.data_pagamento }}</p>
+                <p><strong>Tipo de Pagamento:</strong> {{ pagamento.tipo_pagamento }}</p>
+                <p><strong>Desconto:</strong> {{ pagamento.desconto }}%</p>
+                <p><strong>Total Parcelas:</strong> {{ pagamento.total_parcelas }}</p>
+                <p><strong>Valor das Parcelas:</strong> {{ pagamento.valor_parcelas }}</p>
+                <p><strong>Valor Total com Desconto:</strong> {{ pagamento.total_pagamento_desconto }}</p>
+                <form action="{{ url_for('pagamento.alterar_pagamento', id_pag=pagamento.id) }}" method="post">
+                    <button type="submit">Alterar Pagamento</button>
+                </form>
+            </div>
+        {% endif %}
+        <a href="{{ url_for('pagamento.menu_pagamento') }}">Voltar ao Menu de Pagamento</a>
+    </div>
+</body>
+</html>

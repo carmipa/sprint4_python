@@ -1,0 +1,167 @@
+/* Reset padrão */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilização básica do corpo */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #e0e7ef, #c8d6e5);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+}
+
+/* Estilo do container do menu, formulários e listas */
+.menu-container, .form-container, .list-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 95%;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+/* Título principal */
+h1 {
+    font-size: 2.5em;
+    color: #3a3a3a;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+/* Formulários */
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: left;
+}
+
+input[type="text"], input[type="email"], input[type="date"], input[type="number"], select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botões */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #007bff;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Remove os pontos dos itens da lista */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Estilo opcional: espaçamento entre os itens */
+li {
+    margin-bottom: 10px;
+}
+
+/* Ajustes de largura da tabela */
+table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Adicione esta linha para melhor controle da largura das colunas */
+    text-align: center; /* Centraliza o texto horizontalmente */
+    vertical-align: middle; /* Centraliza o texto verticalmente */
+    width: auto;  /* Distribui o espaço proporcionalmente entre as colunas, a menos que você especifique larguras diferentes */
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Fieldset para formulários */
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 14px;
+    margin-top: 20px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .menu-container, .form-container, .list-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    /* Reduz o tamanho dos textos das células em telas pequenas */
+    th, td {
+        font-size: 0.9em;
+        padding: 8px;
+    }
+
+    /* Adaptar a tabela para visualização em dispositivos móveis */
+    table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+    }
+
+    /* Adiciona uma barra para rolagem lateral */
+    table {
+        overflow-x: auto;
+        display: block;
+    }
+
+    /* Estilo de cabeçalhos e células de dados para visualização vertical */
+    tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+    }
+}

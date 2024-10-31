@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu de Veículos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu de Veículos</h1>
+        <ul>
+            <li><a href="{{ url_for('veiculo.cadastrar_veiculo') }}">Cadastrar Veículo</a></li>
+            <li><a href="{{ url_for('veiculo.listar_veiculos') }}">Listar Veículos</a></li>
+            <li><a href="{{ url_for('veiculo.buscar_veiculo_para_alterar') }}">Alterar Veículo</a></li>
+            <li><a href="{{ url_for('veiculo.buscar_veiculo_para_deletar') }}">Deletar Veículo</a></li>
+            <li><a href="/">Voltar ao Menu Principal</a></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OFICINA VIRTUAL</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Cadastrar Oficina</h1>
+        <form action="{{ url_for('oficina.cadastrar_oficina') }}" method="post">
+            <fieldset>
+                <legend>Diagnóstico:</legend>
+
+                <label for="data_oficina">Data da Oficina:</label>
+                <input type="date" name="data_oficina" id="data_oficina" required>
+
+                <label for="descricao_problema">Descrição do Problema:</label>
+                <textarea name="descricao_problema" id="descricao_problema" required></textarea>
+
+                <label for="diagnostico">Diagnóstico IA:</label>
+                <textarea name="diagnostico" id="diagnostico" cols="20" rows="10" required></textarea>
+                <button type="button" id="ia-button">IA</button>
+
+                <label for="partes_afetadas">Partes Afetadas:</label>
+                <textarea name="partes_afetadas" id="partes_afetadas" cols="20" rows="3"required></textarea>
+
+                <label for="horas_trabalhadas">Tempo Médio para o reparo(h):</label>
+                <input type="number" step="1" name="horas_trabalhadas" id="horas_trabalhadas" required>
+
+            </fieldset>
+            <br>
+            <button type="submit">Cadastrar Oficina</button>
+        </form>
+        <a href="{{ url_for('oficina.menu_oficina') }}">Voltar ao Menu de Oficina</a>
+    </div>
+
+    <!-- JavaScript para o botão IA -->
+    <script>
+    document.getElementById('ia-button').addEventListener('click', function() {
+        const descricao = document.getElementById('descricao_problema').value;
+        if (!descricao) {
+            alert('Por favor, insira a descrição do problema antes de solicitar o diagnóstico.');
+            return;
+        }
+        fetch('{{ url_for("oficina.buscar_diagnostico") }}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ descricao_problema: descricao })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta da rede');
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById('diagnostico').value = data.diagnostico;
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao obter diagnóstico da IA.');
+        });
+    });
+    </script>
+</body>
+</html>

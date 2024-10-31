@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Cliente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Deletar Cliente</h1>
+
+        <!-- Formulário para buscar o cliente por ID -->
+        <form action="{{ url_for('cliente.deletar_cliente') }}" method="post">
+            <label for="cliente_id">ID do Cliente:</label>
+            <input type="text" name="cliente_id" id="cliente_id" required>
+            <button type="submit">Buscar Cliente</button>
+        </form>
+
+        {% if cliente %}
+            <div class="cliente-info">
+                <p><strong>Nome:</strong> {{ cliente['nome'] }} {{ cliente['sobrenome'] }}</p>
+
+                <!-- Confirmação de exclusão -->
+                <form action="{{ url_for('cliente.confirmar_deletar_cliente', id_cli=cliente['id_cli']) }}" method="post">
+                    <button type="submit">Confirmar Deleção</button>
+                </form>
+            </div>
+        {% elif cliente_not_found %}
+            <p>Cliente não encontrado com o ID fornecido.</p>
+        {% endif %}
+
+        <a href="{{ url_for('cliente.menu_clientes') }}">Voltar ao Menu de Clientes</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Cliente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <!-- Script para buscar cliente por CEP -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('cep').addEventListener('blur', function() {
+            var cep = this.value.replace(/\D/g, '');
+            if (cep !== "") {
+                var url = `https://viacep.com.br/ws/${cep}/json/`;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.getElementById('logradouro').value = data.logradouro;
+                            document.getElementById('bairro').value = data.bairro;
+                            document.getElementById('cidade').value = data.localidade;
+                            document.getElementById('estado').value = data.uf;
+                        } else {
+                            alert("CEP não encontrado.");
+                        }
+                    })
+                    .catch(error => {
+                        alert("Erro ao buscar o CEP.");
+                        console.error(error);
+                    });
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h1>CADASTRAR CLIENTE</h1>
+        <form action="{{ url_for('cliente.cadastrar_cliente') }}" method="post">
+            <fieldset>
+                <legend><h2>Dados Pessoais</h2></legend>
+                <label for="tipo_cliente">Tipo de Cliente:</label>
+                <select name="tipo_cliente" id="tipo_cliente" required>
+                    <option value="PF">Pessoa Física</option>
+                    <option value="PJ">Pessoa Jurídica</option>
+                </select>
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" required>
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" name="sobrenome" id="sobrenome" required>
+                <label for="sexo">Sexo:</label>
+                <select name="sexo" id="sexo" required>
+                    <option value="M">Masculino</option>
+                    <option value="F">Feminino</option>
+                </select>
+                <label for="tipo_documento">Tipo de Documento:</label>
+                <select name="tipo_documento" id="tipo_documento" required>
+                    <option value="CPF">CPF</option>
+                    <option value="CNPJ">CNPJ</option>
+                </select>
+                <label for="numero_documento">Número do Documento:</label>
+                <input type="text" name="numero_documento" id="numero_documento" placeholder="Digite CPF ou CNPJ" maxlength="18" required>
+                <script>
+                  document.getElementById('numero_documento').addEventListener('input', function (e) {
+                    var value = e.target.value.replace(/\D/g, '');
+                    if (value.length <= 11) {
+                      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+                      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                    } else {
+                      value = value.replace(/^(\d{2})(\d)/, '$1.$2');
+                      value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
+                      value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
+                      value = value.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+                    }
+                    e.target.value = value;
+                  });
+                </script>
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="date" name="data_nascimento" id="data_nascimento" required>
+                <label for="atividade_profissional">Atividade Profissional:</label>
+                <input type="text" name="atividade_profissional" id="atividade_profissional" required>
+
+            </fieldset>
+            <fieldset>
+                <legend><h2>Contatos</h2></legend>
+
+                <label for="celular">Celular:</label>
+                <input type="text" name="celular" id="celular" maxlength="15" placeholder="(99) 99999-9999" pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}" required>
+                <script>
+                  document.getElementById('celular').addEventListener('input', function (e) {
+                    var x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+                    e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+                  });
+                </script>
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" placeholder="exemplo@dominio.com" required>
+                <label for="contato">Contato:</label>
+                <input type="text" name="contato" id="contato" required>
+
+            </fieldset>
+            <fieldset>
+                <legend><h2>Endereço</h2></legend>
+                <label for="numeroCasa">Número:</label>
+                <input type="text" name="numeroCasa" id="numeroCasa" maxlength="8" required>
+                <label for="cep">CEP:</label>
+                <input type="text" name="cep" id="cep" maxlength="9" placeholder="99999-999" required>
+                <script>
+                  document.getElementById('cep').addEventListener('input', function (e) {
+                    var value = e.target.value.replace(/\D/g, '');
+                    value = value.replace(/^(\d{5})(\d)/, '$1-$2');
+                    e.target.value = value;
+                  });
+                </script>
+                <label for="logradouro">Logradouro:</label>
+                <input type="text" name="logradouro" id="logradouro" maxlength="100" required readonly>
+
+                <label for="bairro">Bairro:</label>
+                <input type="text" name="bairro" id="bairro" maxlength="100" required readonly>
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" name="cidade" id="cidade" maxlength="100" required readonly>
+
+                <label for="estado">Estado:</label>
+                <input type="text" name="estado" id="estado" maxlength="50" required readonly>
+
+                <label for="complemento">Complemento:</label>
+                <input type="text" name="complemento" id="complemento" maxlength="100" required>
+
+            </fieldset>
+            <button type="submit">Cadastrar Cliente</button>
+        </form>
+        <a href="{{ url_for('cliente.menu_clientes') }}">Voltar ao Menu de Clientes</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Cliente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Buscar Cliente</h1>
+        <form action="{{ url_for('cliente.buscar_cliente') }}" method="post">
+            <label for="cliente_id">ID do Cliente:</label>
+            <input type="text" name="cliente_id" id="cliente_id">
+            <label for="nome">Nome do Cliente:</label>
+            <input type="text" name="nome" id="nome">
+            <button type="submit">Buscar Cliente</button>
+        </form>
+        <a href="{{ url_for('cliente.menu_clientes') }}">Voltar ao Menu de Clientes</a>
+    </div>
+</body>
+</html>

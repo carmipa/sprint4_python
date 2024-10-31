@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Veículo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Deletar Veículo</h1>
+        <form action="{{ url_for('veiculo.buscar_veiculo_para_deletar') }}" method="post">
+            <label for="veiculo_id">ID do Veículo:</label>
+            <input type="text" name="oficina_id" required>
+            <button type="submit">Buscar Veículo</button>
+        </form>
+
+        {% if veiculo %}
+        <h2>Confirme a exclusão</h2>
+        <p>Modelo: {{ veiculo.modelo }}</p>
+        <p>Fabricante: {{ veiculo.montadora }}</p>
+        <p>Ano: {{ veiculo.ano_fabricacao }}</p>
+        <form action="{{ url_for('veiculo.deletar_veiculo', id_veiculo=veiculo['id']) }}" method="post">
+            <button type="submit">Confirmar Exclusão</button>
+        </form>
+        {% endif %}
+
+        <a href="{{ url_for('veiculo.menu_veiculo') }}">Voltar ao Menu de Veículos</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Deletar Pagamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Deletar Pagamento</h1>
+        {% if pagamento %}
+            <p><strong>Data do Pagamento:</strong> {{ pagamento.data_pagamento }}</p>
+            <p><strong>Tipo de Pagamento:</strong> {{ pagamento.tipo_pagamento }}</p>
+            <p><strong>Desconto:</strong> {{ pagamento.desconto }}%</p>
+            <p><strong>Total Parcelas:</strong> {{ pagamento.total_parcelas }}</p>
+            <p><strong>Valor Total com Desconto:</strong> {{ pagamento.valor_total_com_desconto }}</p>
+
+            <form action="{{ url_for('pagamento.confirmar_deletar_pagamento', id_pag=pagamento.id) }}" method="post">
+                <button type="submit">Confirmar Exclusão</button>
+            </form>
+
+        {% else %}
+            <p>Pagamento não encontrado com o ID fornecido.</p>
+        {% endif %}
+        <a href="{{ url_for('pagamento.menu_pagamento') }}">Voltar ao Menu de Pagamento</a>
+    </div>
+</body>
+</html>

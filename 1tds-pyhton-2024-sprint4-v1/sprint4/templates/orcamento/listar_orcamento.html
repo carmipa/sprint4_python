@@ -1,0 +1,48 @@
+<!-- templates/orcamento/listar_orcamento.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Orçamentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <div class="list-container">
+        <h1>Orçamentos Cadastrados</h1>
+        {% if orcamentos %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data do Orçamento</th>
+                    <th>Mão de Obra (R$)</th>
+                    <th>Valor da Hora (R$)</th>
+                    <th>Horas Trabalhadas</th>
+                    <th>Valor Total (R$)</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for orcamento in orcamentos %}
+                <tr>
+                    <td>{{ orcamento.id }}</td>
+                    <td>{{ orcamento.data_orcamento }}</td>
+                    <td>{{ orcamento.valor_maodeobra }}</td>
+                    <td>{{ orcamento.valor_hora }}</td>
+                    <td>{{ orcamento.quantidade_horas }}</td>
+                    <td>{{ orcamento.valor_total }}</td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="no-data">Nenhum orçamento encontrado.</p>
+        {% endif %}
+        <br>
+        <a href="{{ url_for('orcamento.menu_orcamento') }}">Voltar ao Menu de Orçamento</a>
+    </div>
+</body>
+</html>

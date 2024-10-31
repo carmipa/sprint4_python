@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Clientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="list-container">
+        <h1>Clientes Cadastrados</h1>
+        {% if clientes %}
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Sobrenome</th>
+                    <th>Sexo</th>
+                    <th>Tipo Documento</th>
+                    <th>Número Documento</th>
+                    <th>Data Nascimento</th>
+                    <th>Atividade Profissional</th>
+                    <th>Celular</th>
+                    <th>Email</th>
+                    <th>CEP</th>
+                    <th>Logradouro</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Complemento</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.id }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.sobrenome }}</td>
+                    <td>{{ cliente.sexo }}</td>
+                    <td>{{ cliente.tipo_documento }}</td>
+                    <td>{{ cliente.numero_documento }}</td>
+                    <td>{{ cliente.data_nascimento }}</td>
+                    <td>{{ cliente.atividade_profissional }}</td>
+                    <td>{{ cliente.celular }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.cep }}</td>
+                    <td>{{ cliente.logradouro }}</td>
+                    <td>{{ cliente.bairro }}</td>
+                    <td>{{ cliente.cidade }}</td>
+                    <td>{{ cliente.estado }}</td>
+                    <td>{{ cliente.complemento }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>Nenhum cliente encontrado.</p>
+        {% endif %}
+        <a href="{{ url_for('cliente.menu_clientes') }}">Voltar ao Menu de Clientes</a>
+    </div>
+</body>
+</html>

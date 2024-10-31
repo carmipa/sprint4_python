@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Cliente</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Alterar Cliente</h1>
+
+        {% if cliente %}
+        <form action="{{ url_for('cliente.alterar_cliente', id_cli=cliente['id_cli']) }}" method="post">
+            <fieldset>
+                <legend><h2>Dados Pessoais</h2></legend>
+
+                <label for="tipo_cliente">Tipo de Cliente:</label>
+                <select name="tipo_cliente" id="tipo_cliente" required>
+                    <option value="PF" {% if cliente['tipo_cliente'] == 'PF' %}selected{% endif %}>Pessoa Física</option>
+                    <option value="PJ" {% if cliente['tipo_cliente'] == 'PJ' %}selected{% endif %}>Pessoa Jurídica</option>
+                </select>
+
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" value="{{ cliente['nome'] }}" required>
+
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" name="sobrenome" id="sobrenome" value="{{ cliente['sobrenome'] }}" required>
+
+                <label for="sexo">Sexo:</label>
+                <select name="sexo" id="sexo" required>
+                    <option value="M" {% if cliente['sexo'] == 'M' %}selected{% endif %}>Masculino</option>
+                    <option value="F" {% if cliente['sexo'] == 'F' %}selected{% endif %}>Feminino</option>
+                </select>
+
+                <label for="tipo_documento">Tipo de Documento:</label>
+                <select name="tipo_documento" id="tipo_documento" required>
+                    <option value="CPF" {% if cliente['tipo_documento'] == 'CPF' %}selected{% endif %}>CPF</option>
+                    <option value="CNPJ" {% if cliente['tipo_documento'] == 'CNPJ' %}selected{% endif %}>CNPJ</option>
+                </select>
+
+                <label for="numero_documento">Número do Documento:</label>
+                <input type="text" name="numero_documento" id="numero_documento" value="{{ cliente['numero_documento'] }}" required>
+
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="date" name="data_nascimento" id="data_nascimento" value="{{ cliente['data_nascimento'] }}" required>
+
+                <label for="atividade_profissional">Atividade Profissional:</label>
+                <input type="text" name="atividade_profissional" id="atividade_profissional" value="{{ cliente['atividade_profissional'] }}" required>
+            </fieldset>
+
+            <fieldset>
+                <legend><h2>Contatos</h2></legend>
+
+                <label for="celular">Celular:</label>
+                <input type="text" name="celular" id="celular" value="{{ cliente['celular'] }}" required>
+
+                <label for="email">E-mail:</label>
+                <input type="email" name="email" id="email" value="{{ cliente['email'] }}" required>
+
+                <label for="contato">Contato:</label>
+                <input type="text" name="contato" id="contato" value="{{ cliente['contato'] }}" required>
+            </fieldset>
+
+            <fieldset>
+                <legend><h2>Endereço</h2></legend>
+
+                <label for="numeroCasa">Número:</label>
+                <input type="text" name="numeroCasa" id="numeroCasa" value="{{ cliente['numero'] }}" required>
+
+                <label for="cep">CEP:</label>
+                <input type="text" name="cep" id="cep" value="{{ cliente['cep'] }}" required>
+
+                <label for="logradouro">Logradouro:</label>
+                <input type="text" name="logradouro" id="logradouro" value="{{ cliente['logradouro'] }}" required>
+
+                <label for="bairro">Bairro:</label>
+                <input type="text" name="bairro" id="bairro" value="{{ cliente['bairro'] }}" required>
+
+                <label for="cidade">Cidade:</label>
+                <input type="text" name="cidade" id="cidade" value="{{ cliente['cidade'] }}" required>
+
+                <label for="estado">Estado:</label>
+                <input type="text" name="estado" id="estado" value="{{ cliente['estado'] }}" required>
+
+                <label for="complemento">Complemento:</label>
+                <input type="text" name="complemento" id="complemento" value="{{ cliente['complemento'] }}">
+            </fieldset>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        {% else %}
+            <p>Erro: Cliente não encontrado.</p>
+        {% endif %}
+
+        <a href="{{ url_for('cliente.menu_clientes') }}">Voltar ao Menu de Clientes</a>
+    </div>
+</body>
+</html>

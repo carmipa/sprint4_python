@@ -1,0 +1,21 @@
+<!-- arquivo: templates/agenda/buscar_agenda.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Agendamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Buscar Agendamento</h1>
+        <form action="{{ url_for('agenda.buscar_agenda') }}" method="post">
+            <label for="agenda_id">ID do Agendamento:</label>
+            <input type="text" name="agenda_id" id="agenda_id" required>
+            <button type="submit">Buscar Agendamento</button>
+        </form>
+        <a href="{{ url_for('agenda.menu_agenda') }}">Voltar ao Menu de Agenda</a>
+    </div>
+</body>
+</html>

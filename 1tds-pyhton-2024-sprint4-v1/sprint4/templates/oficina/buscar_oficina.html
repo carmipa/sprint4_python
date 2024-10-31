@@ -1,0 +1,22 @@
+<!-- templates/oficina/buscar_oficina.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Oficina</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Buscar Oficina</h1>
+        <form action="{{ url_for('oficina.buscar_oficina_para_alterar') }}" method="post">
+            <label for="search_term">ID ou Descrição do Problema:</label>
+            <input type="text" name="search_term" id="search_term" required>
+            <button type="submit">Buscar Oficina</button>
+        </form>
+        <a href="{{ url_for('oficina.menu_oficina') }}">Voltar ao Menu de Oficina</a>
+    </div>
+</body>
+</html>
